@@ -6,33 +6,17 @@ import java.io.IOException;
 import org.apache.hadoop.io.WritableUtils;
 
 
-public class LiecenseTypeWritable extends LiecenseWritable {
+public class LicenseNameWritable extends LicenseWritable  {
 
-	private String _liecenseType;
+	private String _name;
 	private String _id;
-	
-	
-
-
-	@Override
-	public void readFields(DataInput dataInput) throws IOException {
-		// TODO Auto-generated method stub
-		_liecenseType = WritableUtils.readString(dataInput);
-		_id = WritableUtils.readString(dataInput);
+	public String get_name() {
+		return _name;
 	}
 
-	@Override
-	public void write(DataOutput dataOutput) throws IOException {
-		// TODO Auto-generated method stub
-		WritableUtils.writeString(dataOutput, _liecenseType);
-		WritableUtils.writeString(dataOutput, _id);
+	public void set_name(String _name) {
+		this._name = _name;
 	}
-
-	@Override 
-	public String toString(){
-		return _liecenseType+","+_id;
-	}
-
 	public String get_id() {
 		return _id;
 	}
@@ -40,13 +24,24 @@ public class LiecenseTypeWritable extends LiecenseWritable {
 	public void set_id(String _id) {
 		this._id = _id;
 	}
-
-	public String get_liecenseType() {
-		return _liecenseType;
+	@Override
+	public void readFields(DataInput dataInput) throws IOException {
+		// TODO Auto-generated method stub
+		_name = WritableUtils.readString(dataInput);
+		_id = WritableUtils.readString(dataInput);
 	}
 
-	public void set_liecenseType(String _liecenseTypes) {
-		this._liecenseType = _liecenseTypes;
+	@Override
+	public void write(DataOutput dataOutput) throws IOException {
+		// TODO Auto-generated method stub
+		WritableUtils.writeString(dataOutput, _name);
+		WritableUtils.writeString(dataOutput, _id);
 	}
+	@Override 
+	public String toString(){
+		return _name +","+_id;
+	}
+
+	
 
 }

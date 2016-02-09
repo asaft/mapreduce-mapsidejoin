@@ -3,27 +3,26 @@ package mapreduce;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.hadoop.io.FloatWritable;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
-public class MapSideReducer extends Reducer<Text, IntWritable, Text, FloatWritable> 
+public class MapSideReducer extends Reducer<Text, Text, Text, Text> 
 {
-private FloatWritable _valueOut = new FloatWritable();
+private Text _valueOut = new Text();
  
-public void reduce(Text key, Iterable<IntWritable> values, Context context)throws IOException, InterruptedException{
-	Iterator<IntWritable> it = values.iterator();
-	int sum = 0;
-	int count = 0; 
+public void reduce(Text key, Iterable<Text> values, Context context)throws IOException, InterruptedException{
+	Iterator<Text> it = values.iterator();
+	String licenses ="";
+	int count = 1; 
 	while (it.hasNext()){
 		 
-		sum+=it.next().get();
+		licenses+=""+count+"."+it.next().toString();
+		 
 		count++;
 	}
-	float average = sum /count;
-	_valueOut.set(average);
+	
+	_valueOut.set(licenses);
 	context.write(key, _valueOut);
 	
 	
