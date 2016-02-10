@@ -122,7 +122,7 @@ public class LicenseInputFormat extends FileInputFormat<Text,LicenseWritable> {
 				if (_currentValue instanceof  LicenseNameWritable){
 					LicenseNameWritable lnw = (LicenseNameWritable) _currentValue;
 					lnw.set_id(kv[0]);
-					lnw.set_name(kv[1]);
+					lnw.set_name(kv[1]+" "+kv[2]);
 				}
 				else{
 					LicenseTypeWritable type = (LicenseTypeWritable) _currentValue;
